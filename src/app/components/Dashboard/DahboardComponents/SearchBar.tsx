@@ -5,15 +5,16 @@ import { BookVolume } from "@/types/BookTypes";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<BookVolume[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
+
   const searchForBook = (query: string) => {
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&key=AIzaSyAYwuLkv76as3FCivzeipt4WKCTeu-6d78`
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`
       )
       .then((res) => {
         console.log("success", res.data.items);
@@ -29,6 +30,11 @@ const SearchBar = () => {
           type="text"
           value={query}
           onChange={(e) => handleInputChange(e)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchForBook(query);
+            }
+          }}
           placeholder="Search..."
           className="border border-gray-300 rounded-l-lg px-4 py-2 w-full sm:w-64 focus:outline-none"
         />
