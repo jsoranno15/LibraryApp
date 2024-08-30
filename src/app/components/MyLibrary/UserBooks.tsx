@@ -14,7 +14,7 @@ export const UserBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/books");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/books`);
         if (!res.ok) {
           throw new Error("Failed to fetch books");
         }
