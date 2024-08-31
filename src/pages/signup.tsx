@@ -32,8 +32,25 @@ const SignupPage: React.FC = () => {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res);
+      const uid = res.user.uid;
       sessionStorage.setItem("user", "true");
+
+      console.log("auth", auth);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uid, email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to create user in database");
+      }
+
+      console.log("User created in MongoDB:", await response.json());
+
       setEmail("");
       setPassword("");
       setConfirmPassword("");

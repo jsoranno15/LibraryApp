@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { auth } from "../../../firebase/config";
 import Image from "next/image";
 interface Book {
   _id: string;
@@ -14,12 +15,14 @@ export const UserBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/books`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/user?uid=${auth?.currentUser?.uid}`
+        );
         if (!res.ok) {
           throw new Error("Failed to fetch books");
         }
-        const data: Book[] = await res.json();
-        setBooks(data);
+        const data = await res.json();
+        setBooks(data?.library);
       } catch (error) {
         // setError(error instanceof Error ? error.message : "Unknown error");
         // setLoading(false);
