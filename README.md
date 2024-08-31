@@ -1,6 +1,7 @@
 # Library App
 
-##Currently a WIP
+## Currently a WIP
+
 This is a porfolio project to demonstrate the use of:
 
 1. **User Authentication**
