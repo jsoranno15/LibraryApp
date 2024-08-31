@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { BookVolume } from "@/types/BookTypes";
 import { auth } from "../../../../firebase/config";
 import { BookProgress } from "@/types/UserType";
+import useUserStore from "@/app/store/userStore";
 
 const SearchBar = () => {
+  const { currentUser, setCurrentUser, addBookToCurrentUserLibrary } =
+    useUserStore();
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<BookVolume[]>([]);
 
@@ -34,7 +37,7 @@ const SearchBar = () => {
     favorite: boolean;
     progress: BookProgress;
   }) => {
-    if (auth.currentUser) {
+    if (currentUser) {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/user/addBook`,
@@ -43,19 +46,17 @@ const SearchBar = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ uid: auth.currentUser.uid, book }),
+            body: JSON.stringify({ uid: currentUser.uid, book }),
           }
         );
+
         if (!response.ok) {
           const data = await response.json();
           throw new Error(data.error || "Failed to add book to library");
         }
 
-        const userResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/user?uid=${auth.currentUser.uid}`
-        );
-
         // refetch get user
+        addBookToCurrentUserLibrary(book);
       } catch (error: any) {
         console.error("Error adding book to library:", error.message);
       }
@@ -88,7 +89,7 @@ const SearchBar = () => {
           </button>
         </div>
         {books && (
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row flex-wrap gap-2">
             {books.map((book: BookVolume, index) => {
               return (
                 <button

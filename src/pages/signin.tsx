@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { auth, signInWithEmailAndPassword } from "../firebase/config"; // Adjust the path as necessary
 import { useRouter } from "next/router";
+import useUserStore from "@/app/store/userStore";
 
 const SigninPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -31,7 +32,7 @@ const SigninPage: React.FC = () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       console.log(res);
-      console.log("currentUser", auth.currentUser);
+      console.log("firebase user", auth.currentUser);
       sessionStorage.setItem("user", "true");
       setEmail("");
       setPassword("");

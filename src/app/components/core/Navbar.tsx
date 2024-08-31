@@ -3,14 +3,17 @@ import { auth } from "../../../firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
+import useUserStore from "@/app/store/userStore";
 
 const Navbar = () => {
+  const { currentUser, setCurrentUser } = useUserStore();
   const router = useRouter();
   const [user] = useAuthState(auth);
   const userSession = sessionStorage.getItem("user");
 
   const handleLogout = () => {
     signOut(auth);
+    // setCurrentUser(null);
     sessionStorage.removeItem("user");
     console.log("logout", auth.currentUser);
   };
@@ -18,6 +21,7 @@ const Navbar = () => {
   return (
     <nav className=" min-h-[calc(100vh-32px)] flex flex-col gap-8 p-4 min-w-[200px] rounded-xl bg-light-grey overflow-y-scroll">
       <div className="text-lg font-black">LibraryApp</div>
+      <div>{currentUser?.email}</div>
       <div className="flex flex-col gap-4">
         {appPages.map((page, i) => {
           return (

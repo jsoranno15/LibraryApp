@@ -27,6 +27,14 @@ export async function POST(request) {
       });
     }
 
+    const bookExists = user.library.some(
+      (libraryBook) => libraryBook.bookId === book.bookId
+    );
+
+    if (bookExists) {
+      return res.status(400).json({ error: "Book already in library" });
+    }
+
     user.library.push(book);
     await user.save();
 
