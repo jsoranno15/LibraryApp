@@ -5,9 +5,6 @@ import { useEffect, useState } from "react";
 export const BookQuote = () => {
   const [quote, setQuote] = useState<Quote>();
 
-  useEffect(() => {
-    getBookQuote();
-  }, []);
   const getBookQuote = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_RANDOM_QUOTE}`)
@@ -17,6 +14,10 @@ export const BookQuote = () => {
       })
       .catch((err) => console.log("error", err));
   };
+
+  useEffect(() => {
+    getBookQuote();
+  }, []);
 
   return (
     <div className="px-4 w-full">
