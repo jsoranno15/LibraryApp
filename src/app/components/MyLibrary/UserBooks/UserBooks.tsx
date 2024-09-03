@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { auth } from "../../../firebase/config";
+import { auth } from "../../../../firebase/config";
 import Image from "next/image";
 import useUserStore from "@/app/store/userStore";
-import { BookCard } from "../core/BookCard";
+import { BookCard } from "../../core/BookCard";
 interface Book {
   _id: string;
   title: string;
@@ -43,7 +43,7 @@ export const UserBooks = () => {
     if (currentUser) {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/user/deleteBook`,
+          `${process.env.NEXT_PUBLIC_URL}/api/user/book`,
           {
             method: "DELETE",
             headers: {
@@ -63,9 +63,11 @@ export const UserBooks = () => {
 
   console.log("books: ", currentUser?.library);
   return (
-    <div className="bg-light-grey flex flex-col gap-5 rounded-xl p-4  w-full h-full overflow-y-hidden">
-      <span className="font-bold text-lg">Your Library:</span>
-      <div className="flex flex-row gap-5 flex-wrap transition-all duration-300 overflow-scroll">
+    <div className="flex flex-col gap-5 rounded-xl p-4 bg-ds-dark-purple-100  flex-grow overflow-y-auto">
+      <span className="font-bold  text-lg  bg-white w-full rounded-xl p-2 px-4 shadow-md shadow-ds-dark-purple-200 ">
+        Your Library:
+      </span>
+      <div className="flex flex-row gap-5 flex-wrap transition-all duration-300  ">
         {currentUser?.library.map((book, i) => (
           <BookCard
             key={i}

@@ -1,3 +1,4 @@
+import { LoadingSpinner } from "@/app/icons";
 import { Quote } from "@/types/Quotes";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -20,15 +21,21 @@ export const BookQuote = () => {
   }, []);
 
   return (
-    <div className="px-4 w-full">
+    <div className=" w-full bg-ds-pink-100 rounded-xl p-2">
       <div
-        className="flex items-center text-center rounded-xl flew-row 
-      bg-light-grey p-4 min-h-[120px]"
+        className="flex items-center shadow-md shadow-ds-pink-200 bg-white text-center rounded-xl flex-row 
+       p-4 min-h-[120px]"
       >
-        <div className="w-full font-normal flex-flex-col">
-          <div className="font-semibold">{quote?.quote}</div>
-          <div className="font-normal">- {quote?.author}</div>
-        </div>
+        {quote ? (
+          <div className="w-full font-normal flex-flex-col">
+            <div className="font-semibold">{quote?.quote}</div>
+            <div className="font-normal">- {quote?.author}</div>
+          </div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center ">
+            <LoadingSpinner />
+          </div>
+        )}
         {/* <button onClick={() => getBookQuote()} className="">
           refetch
         </button> */}

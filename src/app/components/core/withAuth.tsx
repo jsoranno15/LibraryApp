@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
+import { LoadingSpinner } from "../../icons";
 
 const withAuth = <P extends object>(
   WrappedComponent: React.ComponentType<P>
@@ -10,7 +11,11 @@ const withAuth = <P extends object>(
     const router = useRouter();
 
     if (loading) {
-      return <div>Loading...</div>; // or a loading spinner
+      return (
+        <div className="w-full min-h-screen bg-ds-pink-100 flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      ); // or a loading spinner
     }
 
     if (!user) {

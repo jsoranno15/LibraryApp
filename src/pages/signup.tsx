@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { auth, createUserWithEmailAndPassword } from "../firebase/config"; // Ensure this path is correct
+import Link from "next/link";
 
 const SignupPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -68,22 +69,19 @@ const SignupPage: React.FC = () => {
       setter(e.target.value);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white shadow-md rounded">
+    <div className="flex items-center justify-center min-h-screen bg-ds-pink-100">
+      <div className="w-full max-w-md p-8 bg-white shadow-md shadow-ds-pink-200 rounded-xl">
         <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
         {error && <p className="mb-4 text-red-500">{error}</p>}
         <form onSubmit={handleSignup}>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
+            <label className="block text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
               type="email"
               id="email"
-              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ds-dark-purple-400"
               value={email}
               onChange={handleChange(setEmail)}
               placeholder="Enter your email"
@@ -100,7 +98,7 @@ const SignupPage: React.FC = () => {
             <input
               type="password"
               id="password"
-              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ds-dark-purple-400"
               value={password}
               onChange={handleChange(setPassword)}
               placeholder="Enter your password"
@@ -117,22 +115,30 @@ const SignupPage: React.FC = () => {
             <input
               type="password"
               id="confirmPassword"
-              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ds-dark-purple-400"
               value={confirmPassword}
               onChange={handleChange(setConfirmPassword)}
               placeholder="Confirm your password"
               required
             />
           </div>
-          <button
-            type="submit"
-            className={`w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            disabled={loading}
-          >
-            {loading ? "Signing Up..." : "Sign Up"}
-          </button>
+          <div className="flex flex-col w-full gap-3">
+            <button
+              type="submit"
+              className={`w-full py-2 px-4 bg-ds-dark-purple-400 text-white font-medium rounded-lg hover:bg-ds-dark-purple-600 focus:outline-none focus:ring-2 focus:ring-dark-purple-700 ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={loading}
+            >
+              {loading ? "Signing Up..." : "Sign Up"}
+            </button>
+            <Link
+              className="w-full text-center text-xs hover:text-ds-dark-purple-400 underline"
+              href={"/signin"}
+            >
+              Sign in
+            </Link>
+          </div>
         </form>
       </div>
     </div>

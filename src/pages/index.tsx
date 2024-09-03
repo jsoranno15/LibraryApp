@@ -1,10 +1,10 @@
 import { PrimaryLayout } from "@/app/components/core/PrimaryLayout";
-import { HomePage } from "@/app/components/Dashboard/Homepage";
+import { Dashboard } from "@/app/components/Dashboard/Dashboard";
 import Head from "next/head";
 import { auth } from "../firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
-import withAuth from "@/app/components/withAuth";
+import withAuth from "@/app/components/core/withAuth";
 
 const Home = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const Home = () => {
   const userSession = sessionStorage.getItem("user");
 
   if (!user || !userSession) {
-    router.push("/signup");
+    router.push("/signin");
   }
   return (
     <div className="">
@@ -20,7 +20,7 @@ const Home = () => {
         <title>Library App</title>
       </Head>
       <PrimaryLayout>
-        <HomePage />
+        <Dashboard />
       </PrimaryLayout>
     </div>
   );

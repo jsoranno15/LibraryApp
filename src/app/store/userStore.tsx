@@ -3,7 +3,7 @@ import { Book, User } from "../../types/UserType";
 
 interface UserState {
   currentUser: User | null;
-  setCurrentUser: (user: User) => void;
+  setCurrentUser: (user: User | null) => void;
   addBookToCurrentUserLibrary: (book: Book) => void;
   removeBookFromCurrentUserLibrary: (bookId: string) => void;
 }
