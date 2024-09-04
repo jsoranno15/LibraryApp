@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { auth, signInWithEmailAndPassword } from "../firebase/config"; // Adjust the path as necessary
 import { useRouter } from "next/router";
-import useUserStore from "@/app/store/userStore";
 import Link from "next/link";
 
 const SigninPage: React.FC = () => {
