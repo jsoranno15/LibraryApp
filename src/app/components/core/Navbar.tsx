@@ -3,7 +3,7 @@ import { auth } from "../../../firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
-import { LogoutIcon } from "@/app/icons";
+import { DashboardIcon, LibraryIcon, LogoutIcon } from "@/app/icons";
 import { useCurrentUser, useUserStoreActions } from "@/app/store/userStore";
 
 const Navbar = () => {
@@ -29,12 +29,14 @@ const Navbar = () => {
               <Link
                 key={i}
                 href={page.link}
-                className={`rounded-full py-2 px-3 transition-all duration-150 ${
-                  router.pathname === page.link
-                    ? " bg-ds-dark-purple-100"
-                    : "hover:bg-ds-dark-purple-50"
-                }`}
+                className={`rounded-full py-2 px-3 transition-all duration-150 flex flex-row items-center gap-3
+                   ${
+                     router.pathname === page.link
+                       ? " bg-ds-dark-purple-100"
+                       : "hover:bg-ds-dark-purple-50"
+                   }`}
               >
+                {<span>{page.icon}</span>}
                 {page.name}
               </Link>
             );
@@ -65,9 +67,19 @@ const appPages = [
   {
     name: "Dashboard",
     link: "/",
+    icon: (
+      <span className="flex size-5">
+        <DashboardIcon />
+      </span>
+    ),
   },
   {
     name: "My Library",
     link: "/MyLibrary",
+    icon: (
+      <span className="flex size-5">
+        <LibraryIcon />
+      </span>
+    ),
   },
 ];

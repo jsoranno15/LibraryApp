@@ -42,8 +42,8 @@ export const UserBooks = () => {
   console.log("books: ", currentUser?.library);
   return (
     <div className="flex flex-col gap-5 rounded-xl p-4 bg-ds-dark-purple-100  flex-grow overflow-y-auto">
-      <span className="font-bold  text-lg  bg-white w-full rounded-xl p-2 px-4 shadow-md shadow-ds-dark-purple-200 ">
-        Your Library
+      <span className="font-semibold  text-md  bg-white w-full rounded-xl p-2 px-4 shadow-md shadow-ds-dark-purple-200 ">
+        My Library
       </span>
       <div className="flex flex-row  gap-3 flex-wrap transition-all duration-300  ">
         {currentUser?.library.map((book, i) => (

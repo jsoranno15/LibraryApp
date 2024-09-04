@@ -35,7 +35,7 @@ export const BookSearchDropdown = ({
   return (
     <div
       ref={dropdownRef}
-      className={`absolute top-[46px] max-h-[500px] w-[350px] overflow-y-auto transition-all duraiton-200
+      className={`absolute  top-[46px] max-h-[500px] w-[350px] overflow-y-auto transition-all duraiton-200
          bg-white border rounded-lg shadow-lg mt-2  max-w-fit z-[10]
          ${showDropdown && "rounded-t-none"}
          `}
