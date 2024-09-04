@@ -9,7 +9,10 @@ export const BookCard = ({
   removeBookFromLibrary?: any;
 }) => {
   return (
-    <div className="flex flex-col w-[120px] bg-white p-2 rounded-xl gap-3 justify-between shadow-md shadow-ds-dark-purple-200">
+    <div
+      className="flex flex-col w-[120px] bg-white p-2 rounded-xl gap-3 justify-between shadow-md shadow-ds-dark-purple-200 
+    hover:scale-110 transition-all duration-200"
+    >
       <span className="relative bg-gray-200 rounded-lg aspect-auto h-[120px]">
         {removeBookFromLibrary && (
           <button

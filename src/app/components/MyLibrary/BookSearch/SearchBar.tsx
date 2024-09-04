@@ -1,15 +1,14 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import { BookVolume } from "@/types/BookTypes";
 import { auth } from "../../../../firebase/config";
 import { Book, BookProgress } from "@/types/UserType";
-import useUserStore from "@/app/store/userStore";
 import BookSearchDropdown from "./BookSearchDropdown";
+import { useCurrentUser, useUserStoreActions } from "@/app/store/userStore";
 
 const SearchBar = () => {
-  const { currentUser, setCurrentUser, addBookToCurrentUserLibrary } =
-    useUserStore();
+  const currentUser = useCurrentUser();
+  const { addBookToCurrentUserLibrary } = useUserStoreActions();
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<BookVolume[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
@@ -53,6 +52,7 @@ const SearchBar = () => {
 
         // refetch get user
         addBookToCurrentUserLibrary(book);
+        setQuery("");
       } catch (error: any) {
         console.error("Error adding book to library:", error.message);
       }
@@ -78,14 +78,14 @@ const SearchBar = () => {
             }
           }}
           placeholder="Search by title..."
-          className={`border  rounded-l-xl px-4 py-2 w-full focus:outline-none ${
-            showDropdown && "rounded-b-none"
+          className={`border  px-4 py-2 w-full focus:outline-none ${
+            showDropdown ? "rounded-b-none rounded-tl-xl" : "rounded-l-xl "
           }`}
         />
         <button
           onClick={() => searchForBook(query)}
-          className={`bg-ds-dark-purple-400 transition-all duration-150 text-white px-4 py-2 rounded-r-xl hover:bg-blue-600 focus:outline-none ${
-            showDropdown && "rounded-b-none"
+          className={`bg-ds-dark-purple-400 transition-all duration-150 text-white px-4 py-2 hover:bg-ds-dark-purple-600 focus:outline-none ${
+            showDropdown ? "rounded-b-none rounded-tr-xl" : "rounded-r-xl"
           }`}
         >
           Search

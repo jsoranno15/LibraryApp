@@ -3,18 +3,17 @@ import { auth } from "../../../firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
-import useUserStore from "@/app/store/userStore";
 import { LogoutIcon } from "@/app/icons";
+import { useCurrentUser, useUserStoreActions } from "@/app/store/userStore";
 
 const Navbar = () => {
-  const { currentUser, setCurrentUser } = useUserStore();
+  const currentUser = useCurrentUser();
+  const { setCurrentUser } = useUserStoreActions();
   const router = useRouter();
-  const [user] = useAuthState(auth);
-  const userSession = sessionStorage.getItem("user");
 
   const handleLogout = () => {
     signOut(auth);
-    // setCurrentUser(null);
+    setCurrentUser(null);
     sessionStorage.removeItem("user");
     setCurrentUser(null);
     console.log("logout", auth.currentUser);
