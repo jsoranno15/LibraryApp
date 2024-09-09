@@ -16,12 +16,15 @@ export const BookInformation = ({
 }) => {
   const [bookInfo, setBookInfo] = useState<VolumeInfo | null>(null);
   const currentUser = useCurrentUser();
-  const { removeBookFromCurrentUserLibrary, setBookAsFavorite } =
-    useUserStoreActions();
+  const {
+    removeBookFromCurrentUserLibrary,
+    setBookAsFavorite,
+    getFavoriteCount,
+    toggleCurrentUserBookCompletion,
+  } = useUserStoreActions();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  console.log(currentUser);
   const removeBookFromLibrary = async (bookId: string) => {
     setIsOpen(false);
     if (currentUser) {
@@ -56,22 +59,44 @@ export const BookInformation = ({
             body: JSON.stringify({
               uid: currentUser.uid,
               bookId: bookId,
-              favorite: !isFavorite, // Toggle the favorite status
+              favorite: !isFavorite,
             }),
           }
         );
-        const result = await response.json();
-        if (response.ok) {
-          console.log(result.message); // Handle success
-        } else {
-          //  setError(result.error); // Display error message
-        }
       } catch (error) {
         console.error("Failed to update favorite status:", error);
         // setError("Failed to update favorite status.");
       }
     }
   };
+
+  async function toggleBookCompletion(bookId: string) {
+    if (currentUser) {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/user/book/updateCompleted`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ uid: currentUser.uid, bookId }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(`Error: ${errorData.error}`);
+        }
+
+        const result = await response.json();
+        console.log(result.message); // Success message
+        toggleCurrentUserBookCompletion(bookId);
+      } catch (error) {
+        console.error("Failed to update book completion status:", error);
+      }
+    }
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -85,9 +110,6 @@ export const BookInformation = ({
       .catch((err) => console.log("error", err));
     setIsLoading(false);
   }, [book?.bookId]);
-
-  console.log("bookInfo: ", book);
-  console.log(currentUser);
 
   if (!bookInfo) {
     return (
@@ -129,7 +151,16 @@ export const BookInformation = ({
             </div>
             <div className="w-[170px] gap-2 flex flex-col ">
               <button
-                className="bg-ds-yellow-400 text-white rounded-md py-1 px-2 w-full"
+                className=" bg-ds-green-400  flex w-full justify-center
+                  transition-all duration-150
+                  items-center text-white rounded-md px-2 py-1  "
+                onClick={() => toggleBookCompletion(book?.bookId || "")}
+              >
+                Mark as Completed
+              </button>
+              <button
+                disabled={getFavoriteCount() >= 3 && !book?.favorite}
+                className="bg-ds-yellow-400 text-white rounded-md py-1 px-2 w-full disabled:bg-gray-300"
                 onClick={() => {
                   toggleFavoriteBook(book?.bookId || "");
                   setBookAsFavorite(book?.bookId || "");
@@ -141,8 +172,8 @@ export const BookInformation = ({
               <div className="">
                 <button
                   className=" bg-ds-red-400 hover:bg-ds-red-600 flex w-full justify-center
-              transition-all duration-150
-               items-center text-white rounded-md px-2 py-1  "
+                  transition-all duration-150
+                  items-center text-white rounded-md px-2 py-1  "
                   onClick={() => removeBookFromLibrary(book?.bookId || "")}
                 >
                   Remove from Library

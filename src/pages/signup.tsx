@@ -36,7 +36,7 @@ const SignupPage: React.FC = () => {
       const uid = res.user.uid;
       sessionStorage.setItem("user", "true");
 
-      console.log("auth", auth);
+      // console.log("auth", auth);
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user`, {
         method: "POST",
         headers: {
@@ -50,7 +50,7 @@ const SignupPage: React.FC = () => {
         throw new Error(data.error || "Failed to create user in database");
       }
 
-      console.log("User created in MongoDB:", await response.json());
+      // console.log("User created in MongoDB:", await response.json());
 
       setEmail("");
       setPassword("");

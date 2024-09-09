@@ -22,7 +22,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength = 299 }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <p
+      <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded ? "h-auto" : `h-[${maxLength}px] overflow-hidden`
         }`}
@@ -32,7 +32,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength = 299 }) => {
             __html: displayText || "No description avaiable",
           }}
         />
-      </p>
+      </div>
       {isTextLong && (
         <button
           onClick={handleToggle}

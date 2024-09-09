@@ -40,33 +40,11 @@ export async function PATCH(request) {
       );
     }
 
-    // Toggle favorite status
-    const isCurrentlyFavorite = book.favorite ?? false;
-    const newFavoriteStatus = !isCurrentlyFavorite;
-
-    // Check if adding the book as favorite exceeds the limit
-    if (newFavoriteStatus) {
-      const favoriteCount = user.library.filter(
-        (libraryBook) => libraryBook.favorite
-      ).length;
-
-      if (favoriteCount >= 3) {
-        return new Response(
-          JSON.stringify({ error: "Cannot have more than 3 favorite books" }),
-          {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-      }
-    }
-
-    // Update the book's favorite status
-    book.favorite = newFavoriteStatus;
+    book.progress.completed = !(book.progress.completed ?? false);
     await user.save();
 
     return new Response(
-      JSON.stringify({ message: "Book favorite status updated" }),
+      JSON.stringify({ message: "Book completion status updated" }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },

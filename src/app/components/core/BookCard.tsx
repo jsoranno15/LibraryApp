@@ -19,8 +19,8 @@ export const BookCard = ({ book }: { book: Book }) => {
           ></Image>
         )}
       </span>
-      <div className="flex flex-col h-[1/6]">
-        <span className="truncate font-bold">{book?.title}</span>
+      <div className="flex flex-col h-[1/6] items-start overflow-hidden ">
+        <span className="truncate font-bold ">{book?.title}</span>
         <span className="truncate text-sm">{book?.authors}</span>
         <div className=" h-5 flex flex-row gap-1">
           {book?.favorite && (
@@ -28,7 +28,7 @@ export const BookCard = ({ book }: { book: Book }) => {
               <StarIcon />
             </div>
           )}
-          {!book?.progress?.completed && (
+          {book?.progress?.completed && (
             <div className="size-5 text-ds-green-400">
               <CompletedIcon />
             </div>

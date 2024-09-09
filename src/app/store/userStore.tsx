@@ -9,6 +9,9 @@ interface UserState {
     addBookToCurrentUserLibrary: (book: Book) => void;
     removeBookFromCurrentUserLibrary: (bookId: string) => void;
     setBookAsFavorite: (bookId: string) => void;
+    getFavoriteCount: () => number;
+    getCompletedCount: () => number;
+    toggleCurrentUserBookCompletion: (bookId: string) => void;
   };
 }
 
@@ -16,7 +19,7 @@ const initialState: Omit<UserState, "actions"> = {
   currentUser: null,
 };
 
-export const userStore = create<UserState>((set) => ({
+export const userStore = create<UserState>((set, get) => ({
   ...initialState,
   actions: {
     setCurrentUser: (currentUser: User | null) => set({ currentUser }),
@@ -46,7 +49,6 @@ export const userStore = create<UserState>((set) => ({
         }
         return state;
       }),
-
     setBookAsFavorite: (bookId: string) =>
       set((state) => {
         if (!state.currentUser) return state;
@@ -71,6 +73,44 @@ export const userStore = create<UserState>((set) => ({
           // Favorite the book if it is not currently favorited and there is space
           user.library[bookIndex] = { ...book, favorite: true };
         }
+
+        return { currentUser: { ...user, library: [...user.library] } };
+      }),
+    getFavoriteCount: () => {
+      const state = get();
+      if (!state.currentUser) return 0;
+      return state.currentUser.library.filter((book: Book) => book.favorite)
+        .length;
+    },
+    getCompletedCount: () => {
+      const state = get();
+      if (!state.currentUser) return 0;
+      return state.currentUser.library.filter(
+        (book: Book) => book?.progress?.completed
+      ).length;
+    },
+    toggleCurrentUserBookCompletion: (bookId) =>
+      set((state) => {
+        if (!state.currentUser) return state;
+
+        const user = state.currentUser;
+        const bookIndex = user.library.findIndex(
+          (book) => book.bookId === bookId
+        );
+
+        if (bookIndex === -1) return state;
+
+        const book = user.library[bookIndex];
+        const isCurrentlyCompleted = book.progress?.completed ?? false;
+
+        // Update the book's progress.completed status
+        user.library[bookIndex] = {
+          ...book,
+          progress: {
+            ...book.progress,
+            completed: !isCurrentlyCompleted,
+          },
+        };
 
         return { currentUser: { ...user, library: [...user.library] } };
       }),

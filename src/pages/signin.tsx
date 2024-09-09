@@ -31,8 +31,8 @@ const SigninPage: React.FC = () => {
 
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      console.log(res);
-      console.log("firebase user", auth.currentUser);
+      // console.log(res);
+      // console.log("firebase user", auth.currentUser);
       sessionStorage.setItem("user", "true");
       setEmail("");
       setPassword("");

@@ -1,6 +1,6 @@
 // types/User.ts
 export interface BookProgress {
-  totalPages: number;
+  totalPages?: number;
   pagesRead?: number;
   completed?: boolean;
 }
