@@ -19,6 +19,7 @@ export const FavoriteBookSpotlight = () => {
             if (book.favorite)
               return (
                 <button
+                  key={i}
                   onClick={() => {
                     router.push("/MyLibrary");
                   }}
