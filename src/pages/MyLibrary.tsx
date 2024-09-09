@@ -1,5 +1,5 @@
 import { PrimaryLayout } from "@/app/components/core/PrimaryLayout";
-import { MyLibrary } from "@/app/components/MyLibrary/MyLibrary";
+import { MyLibraryTab } from "@/app/components/MyLibrary/MyLibraryTab";
 import withAuth from "@/app/components/core/withAuth";
 import Head from "next/head";
 
@@ -10,7 +10,7 @@ const LibraryPage = () => {
         <title>Library App</title>
       </Head>
       <PrimaryLayout>
-        <MyLibrary />
+        <MyLibraryTab />
       </PrimaryLayout>
     </div>
   );

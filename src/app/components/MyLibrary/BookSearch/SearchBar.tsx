@@ -24,7 +24,7 @@ const SearchBar = () => {
         `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`
       )
       .then((res) => {
-        console.log("success", res.data.items);
+        // console.log("success", res.data.items);
         setBooks(res.data.items);
       })
       .catch((err) => console.log("error", err));
@@ -63,7 +63,7 @@ const SearchBar = () => {
     setShowDropdown(false);
   };
 
-  console.log("auth.currentUser.uid: ", auth);
+  // console.log("auth.currentUser.uid: ", auth);
 
   if (auth && auth.currentUser)
     return (
@@ -77,7 +77,7 @@ const SearchBar = () => {
               searchForBook(query);
             }
           }}
-          placeholder="Search by title..."
+          placeholder="Add book to library..."
           className={`border  px-4 py-2 w-full focus:outline-none ${
             showDropdown ? "rounded-b-none rounded-tl-xl" : "rounded-l-xl "
           }`}

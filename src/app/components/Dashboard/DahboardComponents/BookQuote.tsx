@@ -10,7 +10,7 @@ export const BookQuote = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_RANDOM_QUOTE}`)
       .then((res) => {
-        console.log("success", res.data);
+        // console.log("success", res.data);
         setQuote(res.data);
       })
       .catch((err) => console.log("error", err));

@@ -50,6 +50,10 @@ export interface PanelizationSummary {
 }
 
 export interface ImageLinks {
+  extraLarge?: string;
+  large?: string;
+  medium?: string;
+  small?: string;
   smallThumbnail: string;
   thumbnail: string;
 }

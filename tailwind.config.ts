@@ -79,6 +79,12 @@ const config: Config = {
           800: "#5D1926",
           900: "#330C15", // Darkest shade
         },
+        "ds-yellow": {
+          400: "#F6D639",
+        },
+        "ds-green": {
+          400: "#72D673",
+        },
       },
     },
   },

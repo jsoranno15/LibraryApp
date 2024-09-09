@@ -2,6 +2,7 @@ import { BookVolume } from "@/types/BookTypes";
 import { Book } from "@/types/UserType";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { PlusIcon } from "@/app/icons";
 
 export const BookSearchDropdown = ({
   books,
@@ -68,7 +69,7 @@ export const BookSearchDropdown = ({
                 });
               }}
             >
-              <div className="flex flex-row h-full gap-2 items-center  p-2">
+              <div className="flex flex-row h-full gap-2 items-center w-full p-2">
                 <span className="w-1/6">
                   {book?.volumeInfo?.imageLinks?.smallThumbnail && (
                     <Image
@@ -80,14 +81,19 @@ export const BookSearchDropdown = ({
                     ></Image>
                   )}
                 </span>
-                <div className="flex flex-col w-5/6">
+                <div className="flex flex-col w-3/4">
                   <span className="font-semibold truncate">
                     {book?.volumeInfo?.title}
                   </span>
                   <span className="text-gray-500 text-xs truncate">
-                    {book?.volumeInfo?.authors}
+                    {book?.volumeInfo?.authors}i
                   </span>
                 </div>
+                {/* <div className="text-white">
+                  <div className="size-4 ">
+                    <PlusIcon />
+                  </div>
+                </div> */}
               </div>
             </li>
           ))}

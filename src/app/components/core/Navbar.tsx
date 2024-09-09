@@ -16,7 +16,7 @@ const Navbar = () => {
     setCurrentUser(null);
     sessionStorage.removeItem("user");
     setCurrentUser(null);
-    console.log("logout", auth.currentUser);
+    // console.log("logout", auth.currentUser);
   };
 
   return (
