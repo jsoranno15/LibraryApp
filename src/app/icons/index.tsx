@@ -6,7 +6,7 @@ export const LoadingSpinner = () => {
         className="w-8 h-8 text-white animate-spin dark:text-gray-600 fill-ds-pink-400"
         viewBox="0 0 100 101"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        xmlns="https://www.w3.org/2000/svg"
       >
         <path
           d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -28,7 +28,7 @@ export const LogoutIcon = () => {
       height="100%"
       width="100%"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
@@ -51,7 +51,7 @@ export const LogoutIcon = () => {
 
 export const DashboardIcon = () => {
   return (
-    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <svg viewBox="0 0 16 16" xmlns="https://www.w3.org/2000/svg" fill="none">
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
@@ -154,7 +154,7 @@ export const LibraryIcon = () => {
 
 export const PlusIcon = () => {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="https://www.w3.org/2000/svg">
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
@@ -179,7 +179,7 @@ export const StarIcon = () => {
     <svg
       viewBox="0 0 24 24"
       fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
@@ -206,7 +206,7 @@ export const CompletedIcon = () => {
       fill="currentColor"
       viewBox="0 0 256 256"
       id="Flat"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
@@ -223,7 +223,7 @@ export const CompletedIcon = () => {
 
 export const OpenBookIcon = () => {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="https://www.w3.org/2000/svg">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
