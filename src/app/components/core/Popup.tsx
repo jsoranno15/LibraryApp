@@ -37,10 +37,10 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 z-50 flex items-center justify-center  bg-opacity-50 backdrop-blur-[2px]">
+    <div className="absolute inset-0 z-50 flex items-center justify-center p-4 am:p-0 bg-opacity-50 backdrop-blur-[2px]">
       <div
         ref={popupRef}
-        className="w-1/2 h-2/3 bg-white p-6 shadow-lg overflow-auto rounded-xl"
+        className="relative  sm:w-1/2 sm:h-2/3 bg-white p-6 shadow-lg overflow-auto rounded-xl"
       >
         {children}
       </div>

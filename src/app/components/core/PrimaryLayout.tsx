@@ -3,6 +3,7 @@ import { Footer } from "./Footer";
 import Navbar from "./Navbar";
 import { auth } from "../../../firebase/config";
 import { useCurrentUser, useUserStoreActions } from "@/app/store/userStore";
+import { FixedNavbar } from "./FixedNavbar";
 
 export const PrimaryLayout = ({ children }: { children: any }) => {
   const currentUser = useCurrentUser();
@@ -35,10 +36,11 @@ export const PrimaryLayout = ({ children }: { children: any }) => {
   if (currentUser)
     return (
       <main className="flex flex-col">
-        <section className=" min-h-[100vh] min-w-[100vw] p-4">
-          <div className="bg-light-grey shadow-md shadow-ds-pink-200 flex flex-row  rounded-xl ">
+        <section className="min-h-[100vh] min-w-[100vw]  sm:p-4">
+          <div className="bg-light-grey shadow-md shadow-ds-pink-200 flex flex-row  sm:rounded-xl ">
             <Navbar />
             {children}
+            <FixedNavbar />
           </div>
         </section>
         <Footer />

@@ -2,9 +2,9 @@ import { DashboardBox } from "./DashboardBox";
 
 export const Footer = () => {
   return (
-    <footer className="px-4 pb-4 ">
+    <footer className="p-1 sm:px-4 sm:pb-4 pb-8">
       <DashboardBox>
-        <div className="flex flex-row gap-5 text-xs text-ds-dark-purple-400 ">
+        <div className="hidden sm:flex flex-row gap-5 text-xs text-ds-dark-purple-400 ">
           <a
             href={"https://www.julianasoranno.com/"}
             target="_blank"

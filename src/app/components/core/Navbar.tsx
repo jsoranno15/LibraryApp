@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { auth } from "../../../firebase/config";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
 import { DashboardIcon, LibraryIcon, LogoutIcon } from "@/app/icons";
 import { useCurrentUser, useUserStoreActions } from "@/app/store/userStore";
+import { ReactElement } from "react";
 
 const Navbar = () => {
   const currentUser = useCurrentUser();
@@ -20,7 +20,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" min-h-[calc(100vh-32px)] flex flex-col  justify-between  border-r border-gray-200 min-w-[300px]   rounded-l-xl  overflow-y-scroll">
+    <nav
+      className="hidden min-h-[calc(100vh-32px)] sm:flex flex-col  justify-between  border-r 
+    border-gray-200 min-w-[300px]   rounded-l-xl  "
+    >
       <div className="flex flex-col gap-8 p-6">
         <div className="text-lg font-black">Library App</div>
         <div className="flex flex-col gap-4">
@@ -63,7 +66,13 @@ const Navbar = () => {
 
 export default Navbar;
 
-const appPages = [
+export interface AppPage {
+  name: string;
+  link: string;
+  icon: ReactElement;
+}
+
+export const appPages = [
   {
     name: "Dashboard",
     link: "/",

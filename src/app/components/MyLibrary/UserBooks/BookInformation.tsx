@@ -120,7 +120,7 @@ export const BookInformation = ({
   }
 
   return (
-    <div className="h-full w-full ">
+    <div className="h-full w-full overflow-y-hidden ">
       <div className="flex flex-col h-full gap-4 pb-8">
         <div className="flex flex-row gap-3">
           <div className="relative rounded-lg h-[300px] items-center flex justify-center w-[197px] aspect-auto shadow-lg">

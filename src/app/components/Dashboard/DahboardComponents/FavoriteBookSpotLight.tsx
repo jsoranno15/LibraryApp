@@ -2,20 +2,21 @@ import { useCurrentUser, useUserStoreActions } from "@/app/store/userStore";
 import { BookCard } from "../../core/BookCard";
 import { useRouter } from "next/router";
 import { PlusIcon } from "@/app/icons";
+import { Book } from "@/types/UserType";
 
 export const FavoriteBookSpotlight = () => {
   const currentUser = useCurrentUser();
   const router = useRouter();
   const { getFavoriteCount } = useUserStoreActions();
   return (
-    <div className="flex flex-col gap-5 rounded-xl p-4 bg-ds-dark-purple-100  w-fit g-full min-w-[424px] min-h-[298px]">
+    <div className="flex flex-col gap-5 rounded-xl p-4 bg-ds-dark-purple-100  w-full sm:min-w-[424px] min-h-[298px]">
       <span className="font-semibold flex gap-2 text-md  bg-white w-fit rounded-xl p-2 px-4 shadow-md shadow-ds-dark-purple-200 ">
         My Favorite Books
         <span>{getFavoriteCount()}/3</span>
       </span>
       {getFavoriteCount() >= 1 ? (
         <div className="flex gap-4">
-          {currentUser?.library.map((book, i) => {
+          {currentUser?.library.map((book: Book, i: number) => {
             if (book.favorite)
               return (
                 <button
