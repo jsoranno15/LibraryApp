@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.25.4",
     "axios": "^1.7.5",
     "core-js": "^3.38.1",
     "firebase": "^10.13.1",
