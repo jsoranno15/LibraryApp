@@ -15,6 +15,11 @@ This is a porfolio project to demonstrate the use of:
 - TypeScript
 - TailwindCSS
 
+### Backend / DB
+
+- MongoDB
+- JavaScript
+
 ### APIs
 
 [Recite](https://github.com/Sumansourabh14/recite?tab=readme-ov-file#api-response-example): Random Quote Generator
